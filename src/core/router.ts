@@ -22,7 +22,7 @@ export default class Router {
         this.routeTable.push({
             path,
             page,
-        })
+        });
     }
 
     route = () : void => {

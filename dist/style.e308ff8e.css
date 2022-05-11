@@ -71,4 +71,34 @@ body {
     background-image: url('/thumb_animalcrossing.a9031fe3.jpeg');
 }
 
+.line-amiibo {
+    display: flex;
+    justify-content: center;
+    height: wrap;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+.item-amiibo {
+    width: 450px;
+    text-align: center;
+}
+
+.item-amiibo-img {
+    height: 300px;
+    margin-bottom: 15px;  
+}
+
+.item-amiibo-text {
+    margin: auto;
+    font-size: 18px;
+}
+
+#item-amiibo-text-head {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+
 /*# sourceMappingURL=/style.e308ff8e.css.map */

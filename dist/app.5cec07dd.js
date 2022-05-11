@@ -201,6 +201,245 @@ function () {
 }();
 
 exports.default = Router;
+},{}],"src/core/api.ts":[function(require,module,exports) {
+"use strict";
+
+var __extends = this && this.__extends || function () {
+  var _extendStatics = function extendStatics(d, b) {
+    _extendStatics = Object.setPrototypeOf || {
+      __proto__: []
+    } instanceof Array && function (d, b) {
+      d.__proto__ = b;
+    } || function (d, b) {
+      for (var p in b) {
+        if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+      }
+    };
+
+    return _extendStatics(d, b);
+  };
+
+  return function (d, b) {
+    if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
+    _extendStatics(d, b);
+
+    function __() {
+      this.constructor = d;
+    }
+
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AmiiboListApi = exports.Api = void 0;
+
+var Api =
+/** @class */
+function () {
+  function Api(url) {
+    this.url = url;
+  }
+
+  Api.prototype.request = function () {
+    return __awaiter(this, void 0, Promise, function () {
+      var response;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            return [4
+            /*yield*/
+            , fetch(this.url)];
+
+          case 1:
+            response = _a.sent();
+            return [4
+            /*yield*/
+            , response.json()];
+
+          case 2:
+            return [2
+            /*return*/
+            , _a.sent()];
+        }
+      });
+    });
+  };
+
+  return Api;
+}();
+
+exports.Api = Api;
+
+var AmiiboListApi =
+/** @class */
+function (_super) {
+  __extends(AmiiboListApi, _super);
+
+  function AmiiboListApi() {
+    return _super !== null && _super.apply(this, arguments) || this;
+  }
+
+  AmiiboListApi.prototype.getData = function () {
+    return __awaiter(this, void 0, Promise, function () {
+      return __generator(this, function (_a) {
+        return [2
+        /*return*/
+        , this.request()];
+      });
+    });
+  };
+
+  return AmiiboListApi;
+}(Api);
+
+exports.AmiiboListApi = AmiiboListApi;
 },{}],"src/core/view.ts":[function(require,module,exports) {
 "use strict";
 
@@ -290,6 +529,149 @@ var __extends = this && this.__extends || function () {
   };
 }();
 
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -300,9 +682,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var api_1 = require("../core/api");
+
 var view_1 = __importDefault(require("../core/view"));
 
-var template = "\n    <div\n        class = \"container\">\n        ammiiiiiibo\n    </div>\n";
+var AMIIBO_URL = "https://www.amiiboapi.com/api/amiibo/?gameseries=@game_series";
+var template = "\n    <div\n        class = \"container\">\n        @amiibo_list\n    </div>\n";
+var itemTemplate = "\n    <div\n        class = \"line-amiibo\">\n        <div\n            class = \"item-amiibo\">\n            <img\n                class = \"item-amiibo-img\"\n                src = \"@amiibo_img_left\"\n                alt = \"mario..\"/>\n            <div\n                class = \"item-amiibo-text\"\n                id = \"item-amiibo-text-head\">\n                    @amiibo_name_left\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @game_series_left\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @release_date_left\n            </div>\n        </div>\n        <div\n            class = \"item-amiibo\">\n            <img\n                class = \"item-amiibo-img\"\n                src = \"@amiibo_img_right\"\n                alt = \"mario..\"/>\n            <div\n                class = \"item-amiibo-text\"\n                id = \"item-amiibo-text-head\">\n                    @amiibo_name_right\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @game_series_right\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @release_date_right\n            </div>\n        </div>\n    </div>\n";
 
 var AmiiboView =
 /** @class */
@@ -313,17 +699,122 @@ function (_super) {
     var _this = _super.call(this, containerId, template) || this;
 
     _this.render = function () {
-      _this.updateView();
+      return __awaiter(_this, void 0, Promise, function () {
+        var api, _a, tempItem, i, _b, gameSeries, image, name, release;
+
+        return __generator(this, function (_c) {
+          switch (_c.label) {
+            case 0:
+              this.gameSeries = location.hash.slice(9);
+              api = new api_1.AmiiboListApi(AMIIBO_URL.replace('@game_series', this.gameSeries));
+              _a = this;
+              return [4
+              /*yield*/
+              , api.getData()];
+
+            case 1:
+              return [4
+              /*yield*/
+              , _c.sent().amiibo];
+
+            case 2:
+              _a.amiibos = _c.sent();
+              tempItem = itemTemplate;
+
+              for (i = 0; i < this.amiibos.length; i++) {
+                _b = this.amiibos[i], gameSeries = _b.gameSeries, image = _b.image, name = _b.name, release = _b.release;
+
+                if (i % 2 == 0) {
+                  tempItem = tempItem.replace("@amiibo_img_left", image);
+                  tempItem = tempItem.replace("@amiibo_name_left", name);
+                  tempItem = tempItem.replace("@game_series_left", gameSeries);
+                  tempItem = tempItem.replace("@release_date_left", release.jp);
+
+                  if (i + 1 == this.amiibos.length) {
+                    // 눈속임용 ㅠㅠ
+                    tempItem = tempItem.replace("@amiibo_img_right", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Solid_white.svg/2048px-Solid_white.svg.png");
+                    tempItem = tempItem.replace("@amiibo_name_right", "");
+                    tempItem = tempItem.replace("@game_series_right", "");
+                    tempItem = tempItem.replace("@release_date_right", "");
+                    this.addHtml(tempItem);
+                  }
+                } else {
+                  tempItem = tempItem.replace("@amiibo_img_right", image);
+                  tempItem = tempItem.replace("@amiibo_name_right", name);
+                  tempItem = tempItem.replace("@game_series_right", gameSeries);
+                  tempItem = tempItem.replace("@release_date_right", release.jp);
+                  this.addHtml(tempItem);
+                  tempItem = itemTemplate;
+                }
+              }
+
+              this.setTemplateData('amiibo_list', this.getHtml());
+              this.updateView();
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
     };
 
+    _this._gameSeries = "";
+    _this._amiibos = [];
     return _this;
   }
 
+  Object.defineProperty(AmiiboView.prototype, "gameSeries", {
+    get: function get() {
+      return this._gameSeries;
+    },
+    set: function set(series) {
+      switch (series) {
+        case "mario":
+          this._gameSeries = "Super Mario";
+          break;
+
+        case "zelda":
+          this._gameSeries = "The Legend of Zelda";
+          break;
+
+        case "donkey":
+          this._gameSeries = "Donkey Kong";
+          break;
+
+        case "kirby":
+          this._gameSeries = "Kirby";
+          break;
+
+        case "pokemon":
+          this._gameSeries = "Pokemon";
+          break;
+
+        case "animal":
+          this._gameSeries = "Animal Crossing";
+          break;
+
+        default:
+          break;
+      }
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(AmiiboView.prototype, "amiibos", {
+    get: function get() {
+      return this._amiibos;
+    },
+    set: function set(array) {
+      this._amiibos = array;
+    },
+    enumerable: false,
+    configurable: true
+  });
   return AmiiboView;
 }(view_1.default);
 
 exports.default = AmiiboView;
-},{"../core/view":"src/core/view.ts"}],"src/page/home.ts":[function(require,module,exports) {
+},{"../core/api":"src/core/api.ts","../core/view":"src/core/view.ts"}],"src/page/home.ts":[function(require,module,exports) {
 "use strict";
 
 var __extends = this && this.__extends || function () {
@@ -441,7 +932,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50059" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50966" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
