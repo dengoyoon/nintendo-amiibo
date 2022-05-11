@@ -259,7 +259,7 @@ function () {
 }();
 
 exports.default = View;
-},{}],"src/page/home.ts":[function(require,module,exports) {
+},{}],"src/page/amiibo.ts":[function(require,module,exports) {
 "use strict";
 
 var __extends = this && this.__extends || function () {
@@ -302,7 +302,71 @@ Object.defineProperty(exports, "__esModule", {
 
 var view_1 = __importDefault(require("../core/view"));
 
-var template = "\n    <div\n        class = \"container\">\n        <div\n            class = \"title\">nintendo amiibo</div>\n        <div>\n        <div\n            class = \"line-first-img\">\n            <div\n                class = \"img-mario\"></div>\n            <div\n                class = \"img-zelda\"></div>\n        </div>\n    </div>\n";
+var template = "\n    <div\n        class = \"container\">\n        ammiiiiiibo\n    </div>\n";
+
+var AmiiboView =
+/** @class */
+function (_super) {
+  __extends(AmiiboView, _super);
+
+  function AmiiboView(containerId) {
+    var _this = _super.call(this, containerId, template) || this;
+
+    _this.render = function () {
+      _this.updateView();
+    };
+
+    return _this;
+  }
+
+  return AmiiboView;
+}(view_1.default);
+
+exports.default = AmiiboView;
+},{"../core/view":"src/core/view.ts"}],"src/page/home.ts":[function(require,module,exports) {
+"use strict";
+
+var __extends = this && this.__extends || function () {
+  var _extendStatics = function extendStatics(d, b) {
+    _extendStatics = Object.setPrototypeOf || {
+      __proto__: []
+    } instanceof Array && function (d, b) {
+      d.__proto__ = b;
+    } || function (d, b) {
+      for (var p in b) {
+        if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+      }
+    };
+
+    return _extendStatics(d, b);
+  };
+
+  return function (d, b) {
+    if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
+    _extendStatics(d, b);
+
+    function __() {
+      this.constructor = d;
+    }
+
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var view_1 = __importDefault(require("../core/view"));
+
+var template = "\n    <div\n        class = \"container\">\n        <div\n            class = \"title\">nintendo amiibo</div>\n        <div>\n        <div\n            class = \"line-img\">\n            <a \n                class = \"img-home-box\"\n                id = \"img-mario\"\n                href=\"#/amiibo/mario\">\n            </a>\n            <a\n                class = \"img-home-box\"\n                id = \"img-zelda\"\n                href=\"#/amiibo/zelda\"></a>\n        </div>\n        <div\n            class = \"line-img\">\n            <a\n                class = \"img-home-box\"\n                id = \"img-donkey\"\n                href=\"#/amiibo/donkey\"></a>\n            <a\n                class = \"img-home-box\"\n                id = \"img-kirby\"\n                href=\"#/amiibo/kirby\"></a>\n        </div>\n        <div\n            class = \"line-img\">\n            <a\n                class = \"img-home-box\"\n                id = \"img-pokemon\"\n                href=\"#/amiibo/pokemon\"></a>\n            <a\n                class = \"img-home-box\"\n                id = \"img-animal\"\n                href=\"#/amiibo/animal\"></a>\n        </div>\n    </div>\n";
 
 var HomeView =
 /** @class */
@@ -338,14 +402,18 @@ Object.defineProperty(exports, "__esModule", {
 
 var router_1 = __importDefault(require("./core/router"));
 
+var amiibo_1 = __importDefault(require("./page/amiibo"));
+
 var home_1 = __importDefault(require("./page/home"));
 
 var router = new router_1.default();
 var homeView = new home_1.default('root');
+var amiiboView = new amiibo_1.default('root');
 router.setDefaultPage(homeView);
 router.addRoutePath("/home/", homeView);
+router.addRoutePath("/amiibo/", amiiboView);
 router.route();
-},{"./core/router":"src/core/router.ts","./page/home":"src/page/home.ts"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./core/router":"src/core/router.ts","./page/amiibo":"src/page/amiibo.ts","./page/home":"src/page/home.ts"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -373,7 +441,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50244" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50059" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

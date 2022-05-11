@@ -7,11 +7,38 @@ const template = `
             class = "title">nintendo amiibo</div>
         <div>
         <div
-            class = "line-first-img">
-            <div
-                class = "img-mario"></div>
-            <div
-                class = "img-zelda"></div>
+            class = "line-img">
+            <a 
+                class = "img-home-box"
+                id = "img-mario"
+                href="#/amiibo/mario">
+            </a>
+            <a
+                class = "img-home-box"
+                id = "img-zelda"
+                href="#/amiibo/zelda"></a>
+        </div>
+        <div
+            class = "line-img">
+            <a
+                class = "img-home-box"
+                id = "img-donkey"
+                href="#/amiibo/donkey"></a>
+            <a
+                class = "img-home-box"
+                id = "img-kirby"
+                href="#/amiibo/kirby"></a>
+        </div>
+        <div
+            class = "line-img">
+            <a
+                class = "img-home-box"
+                id = "img-pokemon"
+                href="#/amiibo/pokemon"></a>
+            <a
+                class = "img-home-box"
+                id = "img-animal"
+                href="#/amiibo/animal"></a>
         </div>
     </div>
 `;

@@ -189,7 +189,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./fonts/nintendo.ttf":[["nintendo.c5572723.ttf","fonts/nintendo.ttf"],"fonts/nintendo.ttf"],"/Users/duhyeon/Desktop/code/nintendo-amiibo/images/thumb_mario.jpeg":[["thumb_mario.02136944.jpeg","images/thumb_mario.jpeg"],"images/thumb_mario.jpeg"],"/Users/duhyeon/Desktop/code/nintendo-amiibo/images/thumb_zelda.png":[["thumb_zelda.504efb9c.png","images/thumb_zelda.png"],"images/thumb_zelda.png"],"_css_loader":"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./fonts/nintendo.ttf":[["nintendo.c5572723.ttf","fonts/nintendo.ttf"],"fonts/nintendo.ttf"],"/Users/duhyeon/Desktop/code/nintendo-amiibo/images/amiibo_background1.jpeg":[["amiibo_background1.f3f9e532.jpeg","images/amiibo_background1.jpeg"],"images/amiibo_background1.jpeg"],"/Users/duhyeon/Desktop/code/nintendo-amiibo/images/thumb_mario.jpeg":[["thumb_mario.02136944.jpeg","images/thumb_mario.jpeg"],"images/thumb_mario.jpeg"],"/Users/duhyeon/Desktop/code/nintendo-amiibo/images/thumb_zelda.png":[["thumb_zelda.504efb9c.png","images/thumb_zelda.png"],"images/thumb_zelda.png"],"/Users/duhyeon/Desktop/code/nintendo-amiibo/images/thumb_donkey.jpeg":[["thumb_donkey.48676dc8.jpeg","images/thumb_donkey.jpeg"],"images/thumb_donkey.jpeg"],"/Users/duhyeon/Desktop/code/nintendo-amiibo/images/thumb_kirby.jpeg":[["thumb_kirby.03d211e4.jpeg","images/thumb_kirby.jpeg"],"images/thumb_kirby.jpeg"],"/Users/duhyeon/Desktop/code/nintendo-amiibo/images/thumb_pokemon.jpeg":[["thumb_pokemon.da705650.jpeg","images/thumb_pokemon.jpeg"],"images/thumb_pokemon.jpeg"],"/Users/duhyeon/Desktop/code/nintendo-amiibo/images/thumb_animalcrossing.jpeg":[["thumb_animalcrossing.a9031fe3.jpeg","images/thumb_animalcrossing.jpeg"],"images/thumb_animalcrossing.jpeg"],"_css_loader":"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -217,7 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50244" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50059" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
