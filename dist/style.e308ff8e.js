@@ -117,235 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/core/router.ts":[function(require,module,exports) {
-"use strict";
+})({"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-var __values = this && this.__values || function (o) {
-  var s = typeof Symbol === "function" && Symbol.iterator,
-      m = s && o[s],
-      i = 0;
-  if (m) return m.call(o);
-  if (o && typeof o.length === "number") return {
-    next: function next() {
-      if (o && i >= o.length) o = void 0;
-      return {
-        value: o && o[i++],
-        done: !o
-      };
-    }
-  };
-  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var Router =
-/** @class */
-function () {
-  function Router() {
-    var _this = this;
-
-    this.setDefaultPage = function (page) {
-      _this.defaultRoute = {
-        path: '',
-        page: page
-      };
-    };
-
-    this.addRoutePath = function (path, page) {
-      _this.routeTable.push({
-        path: path,
-        page: page
-      });
-    };
-
-    this.route = function () {
-      var e_1, _a;
-
-      var routePath = location.hash;
-
-      if (routePath == '' && _this.defaultRoute) {
-        _this.defaultRoute.page.render();
-      }
-
-      try {
-        for (var _b = __values(_this.routeTable), _c = _b.next(); !_c.done; _c = _b.next()) {
-          var routeInfo = _c.value;
-
-          if (routePath.indexOf(routeInfo.path) >= 0) {
-            routeInfo.page.render();
-            break;
-          }
-        }
-      } catch (e_1_1) {
-        e_1 = {
-          error: e_1_1
-        };
-      } finally {
-        try {
-          if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-        } finally {
-          if (e_1) throw e_1.error;
-        }
-      }
-    };
-
-    window.addEventListener('hashchange', this.route.bind(this));
-    this.routeTable = [];
-    this.defaultRoute = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
 
-  return Router;
-}();
+  return bundleURL;
+}
 
-exports.default = Router;
-},{}],"src/core/view.ts":[function(require,module,exports) {
-"use strict";
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var View =
-/** @class */
-function () {
-  function View(containerId, template) {
-    var _this = this;
-
-    this.updateView = function () {
-      if (_this.container) {
-        _this.container.innerHTML = _this.renderTemplate;
-        _this.renderTemplate = _this.template;
-      } else {
-        console.log("최상위 컨테이너가 없어 UI를 진행하지 못합니다.");
-      }
-    };
-
-    this.addHtml = function (htmlString) {
-      _this.htmlList.push(htmlString);
-    };
-
-    this.getHtml = function () {
-      var snapshot = _this.htmlList.join('');
-
-      _this.clearHtmlList();
-
-      return snapshot;
-    };
-
-    this.clearHtmlList = function () {
-      _this.htmlList = [];
-    };
-
-    this.setTemplateData = function (key, value) {
-      _this.renderTemplate = _this.renderTemplate.replace("@".concat(key), value);
-    };
-
-    var containerElement = document.getElementById(containerId);
-
-    if (!containerElement) {
-      throw "최상위 컨테이너가 없어 UI를 진행하지 못합니다.";
+    if (matches) {
+      return getBaseURL(matches[0]);
     }
-
-    this.container = containerElement;
-    this.template = template;
-    this.renderTemplate = template;
-    this.htmlList = [];
   }
 
-  return View;
-}();
+  return '/';
+}
 
-exports.default = View;
-},{}],"src/page/home.ts":[function(require,module,exports) {
-"use strict";
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
 
-var __extends = this && this.__extends || function () {
-  var _extendStatics = function extendStatics(d, b) {
-    _extendStatics = Object.setPrototypeOf || {
-      __proto__: []
-    } instanceof Array && function (d, b) {
-      d.__proto__ = b;
-    } || function (d, b) {
-      for (var p in b) {
-        if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
-      }
-    };
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
 
-    return _extendStatics(d, b);
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
   };
 
-  return function (d, b) {
-    if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
 
-    _extendStatics(d, b);
+var cssTimeout = null;
 
-    function __() {
-      this.constructor = d;
-    }
-
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-}();
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var view_1 = __importDefault(require("../core/view"));
-
-var template = "\n    <div\n        class = \"container\">\n        <div\n            class = \"title\">nintendo amiibo</div>\n        <div>\n        <div\n            class = \"line-first-img\">\n            <div\n                class = \"img-mario\"></div>\n            <div\n                class = \"img-zelda\"></div>\n        </div>\n    </div>\n";
-
-var HomeView =
-/** @class */
-function (_super) {
-  __extends(HomeView, _super);
-
-  function HomeView(containerId) {
-    var _this = _super.call(this, containerId, template) || this;
-
-    _this.render = function () {
-      _this.updateView();
-    };
-
-    return _this;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
   }
 
-  return HomeView;
-}(view_1.default);
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
 
-exports.default = HomeView;
-},{"../core/view":"src/core/view.ts"}],"src/app.ts":[function(require,module,exports) {
-"use strict";
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
 
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
+    cssTimeout = null;
+  }, 50);
+}
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"style.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
 
-var router_1 = __importDefault(require("./core/router"));
-
-var home_1 = __importDefault(require("./page/home"));
-
-var router = new router_1.default();
-var homeView = new home_1.default('root');
-router.setDefaultPage(homeView);
-router.addRoutePath("/home/", homeView);
-router.route();
-},{"./core/router":"src/core/router.ts","./page/home":"src/page/home.ts"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"./fonts/nintendo.ttf":[["nintendo.c5572723.ttf","fonts/nintendo.ttf"],"fonts/nintendo.ttf"],"/Users/duhyeon/Desktop/code/nintendo-amiibo/images/thumb_mario.jpeg":[["thumb_mario.02136944.jpeg","images/thumb_mario.jpeg"],"images/thumb_mario.jpeg"],"/Users/duhyeon/Desktop/code/nintendo-amiibo/images/thumb_zelda.png":[["thumb_zelda.504efb9c.png","images/thumb_zelda.png"],"images/thumb_zelda.png"],"_css_loader":"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -549,5 +393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/app.ts"], null)
-//# sourceMappingURL=/app.5cec07dd.js.map
+},{}]},{},["../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/style.e308ff8e.js.map

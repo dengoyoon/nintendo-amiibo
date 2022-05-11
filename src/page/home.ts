@@ -1,7 +1,19 @@
 import View from "../core/view";
 
 const template = `
-    <div>Nintendo Amiibo</div>
+    <div
+        class = "container">
+        <div
+            class = "title">nintendo amiibo</div>
+        <div>
+        <div
+            class = "line-first-img">
+            <div
+                class = "img-mario"></div>
+            <div
+                class = "img-zelda"></div>
+        </div>
+    </div>
 `;
 
 export default class HomeView extends View {
@@ -10,6 +22,7 @@ export default class HomeView extends View {
     }
 
     render = () : void => {
+        
         this.updateView();
     }
 }

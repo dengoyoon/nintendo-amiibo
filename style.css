@@ -1,0 +1,43 @@
+@font-face {
+    font-family: nintendo;
+    src: url("fonts/nintendo.ttf");
+}
+
+.container {
+    width: 70%;
+    margin: auto;
+}
+
+.title {
+    text-align: center;
+    font-size: 60px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+    font-family: nintendo;
+}
+
+.line-first-img {
+    display: flex;
+    justify-content: center;
+    height: 250px;
+}
+
+.img-mario {
+    background-image: url('/images/thumb_mario.jpeg');
+    width: 35%;
+    margin: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 18px;
+}
+
+.img-zelda {
+    background-image: url('/images/thumb_zelda.png');
+    width: 35%;
+    margin: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 18px;
+}
