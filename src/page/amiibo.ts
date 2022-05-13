@@ -57,6 +57,10 @@ const itemTemplate = `
     </div>
 `;
 
+const printHI = () : void => {
+    console.log("HIHI");
+}
+
 export default class AmiiboView extends View {
     private _gameSeries : string;
     private _amiibos : Amiibo[];
@@ -101,6 +105,15 @@ export default class AmiiboView extends View {
 
         this.setTemplateData('amiibo_list', this.getHtml());
         this.updateView();
+
+        const aaa = document.querySelectorAll(".item-amiibo");
+        aaa.forEach((e, index) => {
+            if (e != null) {
+                e.addEventListener("click", () => {
+                    console.log(e, index);
+                });
+            }
+        })
     }
 
     set gameSeries(series : string) {

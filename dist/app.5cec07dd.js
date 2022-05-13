@@ -439,7 +439,16 @@ function (_super) {
   return AmiiboListApi;
 }(Api);
 
-exports.AmiiboListApi = AmiiboListApi;
+exports.AmiiboListApi = AmiiboListApi; // export class Api {
+//     url;
+//     constructor(url) {
+//         this.url = url;
+//     }
+//     async request() {
+//         const response = await fetch(this.url);
+//         return await response.json();
+//     }
+// }
 },{}],"src/core/view.ts":[function(require,module,exports) {
 "use strict";
 
@@ -690,6 +699,10 @@ var AMIIBO_URL = "https://www.amiiboapi.com/api/amiibo/?gameseries=@game_series"
 var template = "\n    <div\n        class = \"container\">\n        @amiibo_list\n    </div>\n";
 var itemTemplate = "\n    <div\n        class = \"line-amiibo\">\n        <div\n            class = \"item-amiibo\">\n            <img\n                class = \"item-amiibo-img\"\n                src = \"@amiibo_img_left\"\n                alt = \"mario..\"/>\n            <div\n                class = \"item-amiibo-text\"\n                id = \"item-amiibo-text-head\">\n                    @amiibo_name_left\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @game_series_left\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @release_date_left\n            </div>\n        </div>\n        <div\n            class = \"item-amiibo\">\n            <img\n                class = \"item-amiibo-img\"\n                src = \"@amiibo_img_right\"\n                alt = \"mario..\"/>\n            <div\n                class = \"item-amiibo-text\"\n                id = \"item-amiibo-text-head\">\n                    @amiibo_name_right\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @game_series_right\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @release_date_right\n            </div>\n        </div>\n    </div>\n";
 
+var printHI = function printHI() {
+  console.log("HIHI");
+};
+
 var AmiiboView =
 /** @class */
 function (_super) {
@@ -700,7 +713,7 @@ function (_super) {
 
     _this.render = function () {
       return __awaiter(_this, void 0, Promise, function () {
-        var api, _a, tempItem, i, _b, gameSeries, image, name, release;
+        var api, _a, tempItem, i, _b, gameSeries, image, name, release, aaa;
 
         return __generator(this, function (_c) {
           switch (_c.label) {
@@ -750,6 +763,14 @@ function (_super) {
 
               this.setTemplateData('amiibo_list', this.getHtml());
               this.updateView();
+              aaa = document.querySelectorAll(".item-amiibo");
+              aaa.forEach(function (e, index) {
+                if (e != null) {
+                  e.addEventListener("click", function () {
+                    console.log(e, index);
+                  });
+                }
+              });
               return [2
               /*return*/
               ];
@@ -911,7 +932,7 @@ router.addRoutePath("/amiibo/", amiiboView); // routeTable에 각 path와 view�
 
 router.route(); // this.defaultRoute.page.render(); 실행
 // 즉 homeView의 render 실행
-// container인 root에 innerHTML로 저장되어어있는 템플릿 화면에 표시
+// updateView실행 -> container인 root에 innerHTML로 저장되어어있는 템플릿 화면에 표시
 },{"./core/router":"src/core/router.ts","./page/amiibo":"src/page/amiibo.ts","./page/home":"src/page/home.ts"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -940,7 +961,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51194" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51862" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
