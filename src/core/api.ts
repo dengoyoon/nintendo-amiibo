@@ -18,3 +18,16 @@ export class AmiiboListApi extends Api {
         return this.request<AmiiboResponse>();
     }
 }
+
+// export class Api {
+//     url;
+
+//     constructor(url) {
+//         this.url = url;
+//     }
+
+//     async request() {
+//         const response = await fetch(this.url);
+//         return await response.json();
+//     }
+// }

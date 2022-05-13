@@ -895,15 +895,23 @@ var router_1 = __importDefault(require("./core/router"));
 
 var amiibo_1 = __importDefault(require("./page/amiibo"));
 
-var home_1 = __importDefault(require("./page/home"));
+var home_1 = __importDefault(require("./page/home")); // 시작
 
-var router = new router_1.default();
+
+var router = new router_1.default(); // Router의 생성자 실행 -> 해시 체인지 리스너 실행.
+
 var homeView = new home_1.default('root');
-var amiiboView = new amiibo_1.default('root');
-router.setDefaultPage(homeView);
+var amiiboView = new amiibo_1.default('root'); // containerId인 root와 각 뷰에서 만든 템플릿을 View의 생성자에 전달
+// View의 생성자에서 이것들을 저장.
+
+router.setDefaultPage(homeView); // Router의 defaultRoute에 path ''와 view를 homeView로 설정
+
 router.addRoutePath("/home/", homeView);
-router.addRoutePath("/amiibo/", amiiboView);
-router.route();
+router.addRoutePath("/amiibo/", amiiboView); // routeTable에 각 path와 view등록
+
+router.route(); // this.defaultRoute.page.render(); 실행
+// 즉 homeView의 render 실행
+// container인 root에 innerHTML로 저장되어어있는 템플릿 화면에 표시
 },{"./core/router":"src/core/router.ts","./page/amiibo":"src/page/amiibo.ts","./page/home":"src/page/home.ts"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -932,7 +940,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50966" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51194" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
