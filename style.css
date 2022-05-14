@@ -27,6 +27,22 @@ body {
     height: 20px;
 }
 
+.bag-button {
+    position: fixed;
+    width: 65px;
+    height: 65px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 65px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 100%;
+    background-color: white;
+    box-shadow: 0px 0px 15px rgb(195, 195, 195);
+    right: 120px;
+    bottom: 30px;
+}
+
 .title {
     text-align: center;
     font-size: 70px;
