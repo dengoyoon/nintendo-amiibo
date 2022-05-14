@@ -1,13 +1,15 @@
 import Router from "./core/router";
 import AmiiboView from "./page/amiibo";
 import HomeView from "./page/home";
+import Bag from "./bag";
 
 
 // 시작
 const router = new Router();
+const bag = new Bag();
 // Router의 생성자 실행 -> 해시 체인지 리스너 실행.
-const homeView = new HomeView('root');
-const amiiboView = new AmiiboView('root');
+const homeView = new HomeView('root', bag);
+const amiiboView = new AmiiboView('root', bag);
 // containerId인 root와 각 뷰에서 만든 템플릿을 View의 생성자에 전달
 // View의 생성자에서 이것들을 저장.
 

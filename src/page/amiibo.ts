@@ -1,6 +1,7 @@
 import { AmiiboListApi } from "../core/api";
 import View from "../core/view";
 import { Amiibo } from "../model/types";
+import Path from "../bag";
 
 const AMIIBO_URL = "https://www.amiiboapi.com/api/amiibo/?gameseries=@game_series"
 
@@ -64,11 +65,13 @@ const printHI = () : void => {
 export default class AmiiboView extends View {
     private _gameSeries : string;
     private _amiibos : Amiibo[];
+    private _bag : Path;
 
-    constructor(containerId : string) {
+    constructor(containerId : string, path : Path) {
         super(containerId, template);
         this._gameSeries = "";
         this._amiibos = [];
+        this._bag = path;
     }
 
     render = async () : Promise<void> => {
@@ -110,7 +113,8 @@ export default class AmiiboView extends View {
         aaa.forEach((e, index) => {
             if (e != null) {
                 e.addEventListener("click", () => {
-                    console.log(e, index);
+                    this._bag.pushBagStack(this.amiibos[index]);
+                    console.log(this._bag.bagStack);
                 });
             }
         })

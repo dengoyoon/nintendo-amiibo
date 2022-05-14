@@ -1,3 +1,5 @@
+import { Amiibo } from "../model/types";
+
 export default abstract class View {
     private template : string;
     private renderTemplate : string;

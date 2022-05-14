@@ -1,4 +1,5 @@
 import View from "../core/view";
+import Bag from "../bag";
 
 const template = `
     <div
@@ -44,12 +45,14 @@ const template = `
 `;
 
 export default class HomeView extends View {
-    constructor(containerId : string) {
+    private bag : Bag;
+
+    constructor(containerId : string, bag : Bag) {
         super(containerId, template);
+        this.bag = bag;
     }
 
     render = () : void => {
-        
         this.updateView();
     }
 }

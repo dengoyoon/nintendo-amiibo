@@ -1,14 +1,16 @@
-import { RouteInfo } from "../model/types";
+import { Amiibo, RouteInfo } from "../model/types";
 import View from "./view";
 
 export default class Router {
     private routeTable : RouteInfo[];
     private defaultRoute : RouteInfo | null;
+    private pathStack : Amiibo[];
 
     constructor() {
         window.addEventListener('hashchange', this.route.bind(this));
         this.routeTable = [];
         this.defaultRoute = null;
+        this.pathStack = [];
     }
 
     setDefaultPage = (page : View) : void => {

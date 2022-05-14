@@ -195,6 +195,7 @@ function () {
     window.addEventListener('hashchange', this.route.bind(this));
     this.routeTable = [];
     this.defaultRoute = null;
+    this.pathStack = [];
   }
 
   return Router;
@@ -708,12 +709,14 @@ var AmiiboView =
 function (_super) {
   __extends(AmiiboView, _super);
 
-  function AmiiboView(containerId) {
+  function AmiiboView(containerId, path) {
     var _this = _super.call(this, containerId, template) || this;
 
     _this.render = function () {
       return __awaiter(_this, void 0, Promise, function () {
         var api, _a, tempItem, i, _b, gameSeries, image, name, release, aaa;
+
+        var _this = this;
 
         return __generator(this, function (_c) {
           switch (_c.label) {
@@ -767,7 +770,9 @@ function (_super) {
               aaa.forEach(function (e, index) {
                 if (e != null) {
                   e.addEventListener("click", function () {
-                    console.log(e, index);
+                    _this._bag.pushBagStack(_this.amiibos[index]);
+
+                    console.log(_this._bag.bagStack);
                   });
                 }
               });
@@ -781,6 +786,7 @@ function (_super) {
 
     _this._gameSeries = "";
     _this._amiibos = [];
+    _this._bag = path;
     return _this;
   }
 
@@ -885,13 +891,14 @@ var HomeView =
 function (_super) {
   __extends(HomeView, _super);
 
-  function HomeView(containerId) {
+  function HomeView(containerId, bag) {
     var _this = _super.call(this, containerId, template) || this;
 
     _this.render = function () {
       _this.updateView();
     };
 
+    _this.bag = bag;
     return _this;
   }
 
@@ -899,7 +906,36 @@ function (_super) {
 }(view_1.default);
 
 exports.default = HomeView;
-},{"../core/view":"src/core/view.ts"}],"src/app.ts":[function(require,module,exports) {
+},{"../core/view":"src/core/view.ts"}],"src/bag.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Bag =
+/** @class */
+function () {
+  function Bag() {
+    this._bagStack = [];
+  }
+
+  Bag.prototype.pushBagStack = function (item) {
+    this._bagStack.push(item);
+  };
+
+  Object.defineProperty(Bag.prototype, "bagStack", {
+    get: function get() {
+      return this._bagStack;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  return Bag;
+}();
+
+exports.default = Bag;
+},{}],"src/app.ts":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -916,13 +952,16 @@ var router_1 = __importDefault(require("./core/router"));
 
 var amiibo_1 = __importDefault(require("./page/amiibo"));
 
-var home_1 = __importDefault(require("./page/home")); // 시작
+var home_1 = __importDefault(require("./page/home"));
+
+var bag_1 = __importDefault(require("./bag")); // 시작
 
 
-var router = new router_1.default(); // Router의 생성자 실행 -> 해시 체인지 리스너 실행.
+var router = new router_1.default();
+var bag = new bag_1.default(); // Router의 생성자 실행 -> 해시 체인지 리스너 실행.
 
-var homeView = new home_1.default('root');
-var amiiboView = new amiibo_1.default('root'); // containerId인 root와 각 뷰에서 만든 템플릿을 View의 생성자에 전달
+var homeView = new home_1.default('root', bag);
+var amiiboView = new amiibo_1.default('root', bag); // containerId인 root와 각 뷰에서 만든 템플릿을 View의 생성자에 전달
 // View의 생성자에서 이것들을 저장.
 
 router.setDefaultPage(homeView); // Router의 defaultRoute에 path ''와 view를 homeView로 설정
@@ -933,7 +972,7 @@ router.addRoutePath("/amiibo/", amiiboView); // routeTable에 각 path와 view�
 router.route(); // this.defaultRoute.page.render(); 실행
 // 즉 homeView의 render 실행
 // updateView실행 -> container인 root에 innerHTML로 저장되어어있는 템플릿 화면에 표시
-},{"./core/router":"src/core/router.ts","./page/amiibo":"src/page/amiibo.ts","./page/home":"src/page/home.ts"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./core/router":"src/core/router.ts","./page/amiibo":"src/page/amiibo.ts","./page/home":"src/page/home.ts","./bag":"src/bag.ts"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -961,7 +1000,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61893" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49764" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
