@@ -14,4 +14,8 @@ export default class Bag {
     get bagStack() : Amiibo[] {
         return this._bagStack;
     }
+
+    getBagSize() : number {
+        return this._bagStack.length;
+    }
 }

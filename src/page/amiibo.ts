@@ -114,6 +114,7 @@ export default class AmiiboView extends View {
             if (e != null) {
                 e.addEventListener("click", () => {
                     this._bag.pushBagStack(this.amiibos[index]);
+                    document.querySelectorAll(".bag-button")[0].innerHTML = String(this._bag.getBagSize());
                     console.log(this._bag.bagStack);
                 });
             }
