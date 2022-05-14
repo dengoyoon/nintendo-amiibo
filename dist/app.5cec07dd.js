@@ -700,10 +700,6 @@ var AMIIBO_URL = "https://www.amiiboapi.com/api/amiibo/?gameseries=@game_series"
 var template = "\n    <div\n        class = \"container\">\n        @amiibo_list\n    </div>\n";
 var itemTemplate = "\n    <div\n        class = \"line-amiibo\">\n        <div\n            class = \"item-amiibo\">\n            <img\n                class = \"item-amiibo-img\"\n                src = \"@amiibo_img_left\"\n                alt = \"mario..\"/>\n            <div\n                class = \"item-amiibo-text\"\n                id = \"item-amiibo-text-head\">\n                    @amiibo_name_left\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @game_series_left\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @release_date_left\n            </div>\n        </div>\n        <div\n            class = \"item-amiibo\">\n            <img\n                class = \"item-amiibo-img\"\n                src = \"@amiibo_img_right\"\n                alt = \"mario..\"/>\n            <div\n                class = \"item-amiibo-text\"\n                id = \"item-amiibo-text-head\">\n                    @amiibo_name_right\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @game_series_right\n            </div>\n            <div\n                class = \"item-amiibo-text\">\n                    @release_date_right\n            </div>\n        </div>\n    </div>\n";
 
-var printHI = function printHI() {
-  console.log("HIHI");
-};
-
 var AmiiboView =
 /** @class */
 function (_super) {
@@ -917,8 +913,16 @@ Object.defineProperty(exports, "__esModule", {
 var Bag =
 /** @class */
 function () {
-  function Bag() {
+  function Bag(containerId) {
     this._bagStack = [];
+    var containerElement = document.getElementById(containerId);
+
+    if (!containerElement) {
+      throw "가방의 id가 없어 진행하지 못합니다.";
+    }
+
+    this.bagContainer = containerElement;
+    this.bagContainer.addEventListener("click", function () {});
   }
 
   Bag.prototype.pushBagStack = function (item) {
@@ -964,7 +968,7 @@ var bag_1 = __importDefault(require("./bag")); // 시작
 
 
 var router = new router_1.default();
-var bag = new bag_1.default(); // Router의 생성자 실행 -> 해시 체인지 리스너 실행.
+var bag = new bag_1.default('bag-button'); // Router의 생성자 실행 -> 해시 체인지 리스너 실행.
 
 var homeView = new home_1.default('root', bag);
 var amiiboView = new amiibo_1.default('root', bag); // containerId인 root와 각 뷰에서 만든 템플릿을 View의 생성자에 전달
@@ -1006,7 +1010,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60681" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60913" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

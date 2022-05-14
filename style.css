@@ -27,7 +27,7 @@ body {
     height: 20px;
 }
 
-.bag-button {
+#bag-button {
     position: fixed;
     width: 65px;
     height: 65px;
@@ -41,6 +41,70 @@ body {
     box-shadow: 0px 0px 15px rgb(195, 195, 195);
     right: 120px;
     bottom: 30px;
+}
+
+#bag {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+}
+
+#bag-content {
+    width: 100%;
+    height: wrap;
+}
+
+#bag-list {
+    background-color: white;
+    height: 350px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 20px;
+}
+
+.button-section {
+    display: flex;
+    position: fixed;
+    right: 30px;
+}
+
+#buy-button {
+    width: 130px;
+    height: 60px;
+    font-size: 22px;
+    margin-top: 10px;
+    color: white;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-weight: bold;
+    border-color: rgb(0, 71, 236);
+    border-width: 2px;
+    border-style: solid;
+    background-color: rgb(0, 71, 236);
+}
+
+#close-button {
+    width: 130px;
+    height: 60px;
+    right: 30px;
+    font-size: 22px;
+    margin-top: 10px;
+    color: rgb(68, 68, 68);
+    text-align: center;
+    line-height: 60px;
+    font-weight: bold;
+    border-radius: 20px;
+    border-color: rgb(210, 210, 210);
+    border-width: 2px;
+    border-style: solid;
+    background-color: rgb(210, 210, 210);
 }
 
 .title {

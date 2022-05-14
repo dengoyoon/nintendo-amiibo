@@ -58,10 +58,6 @@ const itemTemplate = `
     </div>
 `;
 
-const printHI = () : void => {
-    console.log("HIHI");
-}
-
 export default class AmiiboView extends View {
     private _gameSeries : string;
     private _amiibos : Amiibo[];
