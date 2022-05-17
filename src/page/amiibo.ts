@@ -105,13 +105,15 @@ export default class AmiiboView extends View {
         this.setTemplateData('amiibo_list', this.getHtml());
         this.updateView();
 
-        const aaa = document.querySelectorAll(".item-amiibo");
-        aaa.forEach((e, index) => {
+        const amiibos = document.querySelectorAll(".item-amiibo");
+        amiibos.forEach((e, index) => {
             if (e != null) {
                 e.addEventListener("click", () => {
                     this._bag.pushBagStack(this.amiibos[index]);
-                    document.querySelectorAll(".bag-button")[0].innerHTML = String(this._bag.getBagSize());
-                    console.log(this._bag.bagStack);
+                    const bagButton = document.getElementById("bag-button");
+                    if(bagButton) {
+                        bagButton.innerHTML = String(this._bag.getBagSize());
+                    }
                 });
             }
         })

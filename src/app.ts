@@ -6,7 +6,7 @@ import Bag from "./bag";
 
 // 시작
 const router = new Router();
-const bag = new Bag('bag-button');
+const bag = new Bag('container', 'bag-button');
 // Router의 생성자 실행 -> 해시 체인지 리스너 실행.
 const homeView = new HomeView('root', bag);
 const amiiboView = new AmiiboView('root', bag);

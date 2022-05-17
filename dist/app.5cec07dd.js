@@ -710,7 +710,7 @@ function (_super) {
 
     _this.render = function () {
       return __awaiter(_this, void 0, Promise, function () {
-        var api, _a, tempItem, i, _b, gameSeries, image, name, release, aaa;
+        var api, _a, tempItem, i, _b, gameSeries, image, name, release, amiibos;
 
         var _this = this;
 
@@ -762,14 +762,17 @@ function (_super) {
 
               this.setTemplateData('amiibo_list', this.getHtml());
               this.updateView();
-              aaa = document.querySelectorAll(".item-amiibo");
-              aaa.forEach(function (e, index) {
+              amiibos = document.querySelectorAll(".item-amiibo");
+              amiibos.forEach(function (e, index) {
                 if (e != null) {
                   e.addEventListener("click", function () {
                     _this._bag.pushBagStack(_this.amiibos[index]);
 
-                    document.querySelectorAll(".bag-button")[0].innerHTML = String(_this._bag.getBagSize());
-                    console.log(_this._bag.bagStack);
+                    var bagButton = document.getElementById("bag-button");
+
+                    if (bagButton) {
+                      bagButton.innerHTML = String(_this._bag.getBagSize());
+                    }
                   });
                 }
               });
@@ -909,21 +912,55 @@ exports.default = HomeView;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var bagTemplate = "\n<div id = \"bag\">\n    <div id = \"bag-content\">\n        <div id = \"bag-list\">\n            @bag_item\n        </div>\n        <div class = \"button-section\">\n            <div id = \"buy-button\">\uAD6C\uB9E4\uD558\uAE30</div>\n            <div id = \"close-button\">\uB2EB\uAE30</div>\n        </div>\n    </div>\n</div>\n";
+var bagItemTemplate = "\n<div id = \"bag-item\">\n    <img\n        class = \"bag-item-img\" \n        src = \"@amiibo_img\"/>\n    <div\n        class = \"item-amiibo-text\"\n        id = \"item-amiibo-text-head\">\n            @amiibo_name\n    </div>\n    <div\n        class = \"item-amiibo-text\">\n            @game_series\n    </div>\n    <div\n        class = \"item-amiibo-text\">\n            @release_date\n    </div>    \n</div>\n";
 
 var Bag =
 /** @class */
 function () {
-  function Bag(containerId) {
+  function Bag(containerId, bagButtonId) {
+    var _this = this;
+
     this._bagStack = [];
     var containerElement = document.getElementById(containerId);
 
     if (!containerElement) {
-      throw "가방의 id가 없어 진행하지 못합니다.";
+      throw "다이얼로그 컨테이너 id가 없어 진행하지 못합니다.";
     }
 
-    this.bagContainer = containerElement;
-    this.bagContainer.addEventListener("click", function () {});
+    var bagButtonElement = document.getElementById(bagButtonId);
+
+    if (!bagButtonElement) {
+      throw "가방버튼의 id가 없어 진행하지 못합니다.";
+    }
+
+    this.bagButton = bagButtonElement;
+    this.container = containerElement;
+    this._existingHtmlLength = this.container.innerHTML.length;
+    this.bagButton.addEventListener("click", function () {
+      _this.show();
+    });
   }
+
+  Bag.prototype.show = function () {
+    var _this = this;
+
+    var _a;
+
+    var itemsHtml = [];
+    this.bagStack.forEach(function (item) {
+      var renderItemTemplate = bagItemTemplate;
+      renderItemTemplate = renderItemTemplate.replace('@amiibo_img', item.image);
+      renderItemTemplate = renderItemTemplate.replace('@amiibo_name', item.name);
+      renderItemTemplate = renderItemTemplate.replace('@game_series', item.gameSeries);
+      renderItemTemplate = renderItemTemplate.replace('@release_date', item.release.jp);
+      itemsHtml.push(renderItemTemplate);
+    });
+    this.container.innerHTML += bagTemplate.replace('@bag_item', itemsHtml.join(''));
+    (_a = document.getElementById('close-button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
+      _this.container.innerHTML = _this.container.innerHTML.replace(bagTemplate.replace('@bag_item', itemsHtml.join('')), "");
+    });
+  };
 
   Bag.prototype.pushBagStack = function (item) {
     this._bagStack.push(item);
@@ -941,6 +978,13 @@ function () {
     return this._bagStack.length;
   };
 
+  Object.defineProperty(Bag.prototype, "existingHtmlLength", {
+    get: function get() {
+      return this._existingHtmlLength;
+    },
+    enumerable: false,
+    configurable: true
+  });
   return Bag;
 }();
 
@@ -968,7 +1012,7 @@ var bag_1 = __importDefault(require("./bag")); // 시작
 
 
 var router = new router_1.default();
-var bag = new bag_1.default('bag-button'); // Router의 생성자 실행 -> 해시 체인지 리스너 실행.
+var bag = new bag_1.default('container', 'bag-button'); // Router의 생성자 실행 -> 해시 체인지 리스너 실행.
 
 var homeView = new home_1.default('root', bag);
 var amiiboView = new amiibo_1.default('root', bag); // containerId인 root와 각 뷰에서 만든 템플릿을 View의 생성자에 전달
@@ -1010,7 +1054,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51585" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56188" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
